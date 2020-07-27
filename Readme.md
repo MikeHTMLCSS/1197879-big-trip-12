@@ -1,7 +1,7 @@
 # Личный проект «Большое путешествие» [![Build status][travis-image]][travis-url]
 
 * Студент: [Михаил Голубев](https://up.htmlacademy.ru/ecmascript/12/user/1197879).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Рожков](https://up.htmlacademy.ru/ecmascript/12/user/1069033).
 
 ---
 
