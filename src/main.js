@@ -1,4 +1,5 @@
-var makeInfo = function () {
+'use strict';
+const makeInfo =  () => {
   let information = `
   <section class="trip-main__trip-info  trip-info">
     <div class="trip-info__main">
@@ -13,7 +14,7 @@ var makeInfo = function () {
   </section>`;
   return information;
 };
-var makeNavigation = function () {
+const makeNavigation = () => {
   let navigation = `
   <nav class="trip-controls__trip-tabs  trip-tabs">
     <a class="trip-tabs__btn  trip-tabs__btn--active" href="#">Table</a>
@@ -21,7 +22,7 @@ var makeNavigation = function () {
   </nav>`;
   return navigation;
 };
-var makeFiterForm = function () {
+const makeFiterForm = () => {
   let filterForm = `
   <form class="trip-filters" action="#" method="get">
     <div class="trip-filters__filter">
@@ -43,7 +44,7 @@ var makeFiterForm = function () {
   </form>`;
   return filterForm;
 };
-var makeSortForm = function () {
+const makeSortForm = () => {
   let sortForm = `
   <form class="trip-events__trip-sort  trip-sort" action="#" method="get">
     <span class="trip-sort__item  trip-sort__item--day">Day</span>
@@ -77,13 +78,13 @@ var makeSortForm = function () {
   </form>`;
   return sortForm;
 };
-var makeDayList = function () {
+const makeDayList = () => {
   let dayList = `
   <ul class="trip-days">
   </ul>`;
   return dayList;
 };
-var makeDayElement = function () {
+const makeDayElement = () => {
   let dayElement = `
   <li class="trip-days__item  day">
     <div class="day__info">
@@ -240,3 +241,18 @@ var makeDayElement = function () {
   </li>`;
   return dayElement;
 };
+const render = (container, template, place) => {
+  container.insertAdjacentHTML(place, template);
+};
+const tripMainElement = document.querySelector(`.trip-main`);
+render(tripMainElement, makeInfo(), `afterBegin`);
+const tripFiterTitle = document.querySelector(`.trip-main__filte-title`);
+render(tripFiterTitle, makeNavigation(), `beforeBegin`);
+render(tripFiterTitle, makeFiterForm(), `afterEnd`);
+const tripEventsElement = document.querySelector(`.trip-events`);
+render(tripEventsElement, makeSortForm(), `beforeEnd`);
+render(tripEventsElement, makeDayList(), `beforeEnd`);
+const tripDaysElement = document.querySelector(`.trip-days`);
+for (let i = 0; i < 3; i++) {
+  render(tripDaysElement, makeDayElement(), `afterEnd`)
+}
