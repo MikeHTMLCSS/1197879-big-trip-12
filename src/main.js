@@ -1,4 +1,5 @@
 'use strict';
+const DAYS_NUMBER = 3;
 const makeInfo =  () => {
   let information = `
   <section class="trip-main__trip-info  trip-info">
@@ -246,13 +247,13 @@ const render = (container, template, place) => {
 };
 const tripMainElement = document.querySelector(`.trip-main`);
 render(tripMainElement, makeInfo(), `afterBegin`);
-const tripFiterTitle = document.querySelector(`.trip-main__filte-title`);
+const tripFiterTitle = document.querySelector(`.trip-main__filter-title`);
 render(tripFiterTitle, makeNavigation(), `beforeBegin`);
 render(tripFiterTitle, makeFiterForm(), `afterEnd`);
 const tripEventsElement = document.querySelector(`.trip-events`);
 render(tripEventsElement, makeSortForm(), `beforeEnd`);
 render(tripEventsElement, makeDayList(), `beforeEnd`);
 const tripDaysElement = document.querySelector(`.trip-days`);
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < DAYS_NUMBER; i++) {
   render(tripDaysElement, makeDayElement(), `afterEnd`)
 }
