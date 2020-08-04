@@ -1,6 +1,6 @@
 'use strict';
 const DAYS_NUMBER = 3;
-const makeInfo =  () => {
+const makeInfo = () => {
   let information = `
   <section class="trip-main__trip-info  trip-info">
     <div class="trip-info__main">
@@ -255,5 +255,5 @@ render(tripEventsElement, makeSortForm(), `beforeEnd`);
 render(tripEventsElement, makeDayList(), `beforeEnd`);
 const tripDaysElement = document.querySelector(`.trip-days`);
 for (let i = 0; i < DAYS_NUMBER; i++) {
-  render(tripDaysElement, makeDayElement(), `afterEnd`)
+  render(tripDaysElement, makeDayElement(), `afterEnd`);
 }
