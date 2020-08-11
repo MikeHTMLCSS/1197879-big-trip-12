@@ -1,6 +1,6 @@
 'use strict';
 
-const DAYS_NUMBER = 3;
+import {DAYS_NUMBER} from './data/constants.js';
 
 import {makeInformation} from './view/information.js';
 import {makeNavigation} from './view/navigation.js';
@@ -13,7 +13,6 @@ import {makePointElement} from './view/point_element.js';
 
 import {makeDayDataMock} from './mock/day.js';
 import {makeRouteDataMock} from './mock/route.js';
-
 let routeData = makeRouteDataMock();
 let dayData = [];
 for (let i = 0; i < DAYS_NUMBER; i++) {
