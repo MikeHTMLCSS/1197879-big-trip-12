@@ -40,29 +40,22 @@ const POINT_ELEMENT_TYPES = {
     text: 'Restaurant in',
   },
 };
+const numberOfMinutesPerHour = 60;
 const makePointElement = (data) => {
-  let eventDuration = (data.endTime.hours - data.startTime.hours) * 60 + data.endTime.minutes - data.startTime.minutes;
-  if (eventDuration < 60) {
+  let eventDuration = (data.endTime.hours - data.startTime.hours) * numberOfMinutesPerHour + data.endTime.minutes - data.startTime.minutes;
+  if (eventDuration < numberOfMinutesPerHour) {
     eventDuration = eventDuration + `M`;
   } else {
-    if (eventDuration % 60 === 0) {
-      eventDuration = `${eventDuration / 60}H`;
+    if (eventDuration % numberOfMinutesPerHour === 0) {
+      eventDuration = `${eventDuration / numberOfMinutesPerHour}H`;
     } else {
-      eventDuration = `${(eventDuration - eventDuration % 60) / 60}H ${eventDuration % 60}M`;
+      eventDuration = `${(eventDuration - eventDuration % numberOfMinutesPerHour) / numberOfMinutesPerHour}H ${eventDuration % numberOfMinutesPerHour}M`;
     }
   }
-  if (data.startTime.hours < 10) {
-    data.startTime.hours = `0` + data.startTime.hours;
-  }
-  if (data.startTime.minutes < 10) {
-    data.startTime.minutes = `0` + data.startTime.minutes;
-  }
-  if (data.endTime.hours < 10) {
-    data.endTime.hours = `0` + data.endTime.hours;
-  }
-  if (data.endTime.minutes < 10) {
-    data.endTime.minutes = `0` + data.endTime.minutes;
-  }
+  data.startTime.hours = String(data.startTime.hours).padStart(2, '0');
+  data.startTime.minutes = String(data.startTime.minutes).padStart(2, '0');
+  data.endTime.hours = String(data.endTime.hours).padStart(2, '0');
+  data.endTime.minutes = String(data.endTime.minutes).padStart(2, '0');
   let eventOffers = '';
   for (let i = 0; i < data.options.length; i++) {
     eventOffers = eventOffers + `

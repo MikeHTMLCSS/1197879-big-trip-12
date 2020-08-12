@@ -1,15 +1,15 @@
-const INFORMATION_MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+import {MONTHS} from '../data/constant.js';
 const makeInformation = (data) => {
   let informationCities = ``;
   for (let i = 0; i < data.cities.length - 1; i++) {
     informationCities = informationCities + data.cities[i] + ` &mdash; `;
   }
   informationCities = informationCities + data.cities[data.cities.length - 1];
-  let informationDate = INFORMATION_MONTHS[data.date.start.month - 1] + ` ` + data.date.start.day;
+  let informationDate = MONTHS[data.date.start.month - 1] + ` ` + data.date.start.day;
   if (data.date.start.month === data.date.end.month) {
     informationDate = informationDate + `&mdash;` + data.date.end.day;
   } else {
-    informationDate = informationDate + ` &mdash; ` + INFORMATION_MONTHS[data.date.end.month - 1] + ` ` + data.date.end.day;
+    informationDate = informationDate + ` &mdash; ` + MONTHS[data.date.end.month - 1] + ` ` + data.date.end.day;
   }
   let information = `
   <section class="trip-main__trip-info  trip-info">

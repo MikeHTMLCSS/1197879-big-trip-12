@@ -39,6 +39,7 @@ const makeDayDataMock = () => {
   let dayData = {
     number: 5,
     date: {
+      year: 2020,
       month: 3,
       day: 24,
     },
