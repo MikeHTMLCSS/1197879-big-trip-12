@@ -1,9 +1,9 @@
-const renderDays = (renderFunction, makeDayElement, makePointElement, container, data) => {
+const renderDays = (renderFunction, MakeDayElement, MakePointElement, container, data) => {
   data.forEach(dayData => {
-    renderFunction(container, makeDayElement(dayData), `beforeEnd`);
+    renderFunction(container, new MakeDayElement(dayData).getHTML(), `beforeEnd`);
     let dayContainer = document.querySelectorAll(`.trip-events__list`)[document.querySelectorAll(`.trip-events__list`).length - 1];
     dayData.routePoints.forEach(pointData => {
-      renderFunction(dayContainer, makePointElement(pointData), `beforeEnd`);
+      renderFunction(dayContainer, new MakePointElement(pointData).getHTML(), `beforeEnd`);
     });
   });
 };
