@@ -1,4 +1,4 @@
-import {createElement} from '../util/utils.js'
+import {createElement} from '../util/utils.js';
 export default class DayListComponent {
   constructor() {
     this._element = null;

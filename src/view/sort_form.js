@@ -1,10 +1,11 @@
-import {createElement} from '../util/utils.js'
+import {createElement} from '../util/utils.js';
 export default class SortFormComponent {
   constructor() {
     this._element = null;
   }
   _getTemplate() {
     let sortForm = `
+    <h2 class="visually-hidden trip-main__filter-title">Filter events</h2>
     <form class="trip-events__trip-sort  trip-sort" action="#" method="get">
       <span class="trip-sort__item  trip-sort__item--day">Day</span>
 

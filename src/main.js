@@ -18,9 +18,9 @@ const dayData = callMockGenerationFunctions()[1];
 const renderSite = () => {
   const tripMainElement = document.querySelector(`.trip-main`);
   renderElement(tripMainElement, new InformationComponent(routeData).getElement(), RENDER_POSITION.afterBegin);
-  //const tripFiterTitle = document.querySelector(`.trip-main__filter-title`);
-  //renderElement(tripFiterTitle, new MakeNavigation().getElement(), `beforeBegin`);//!
-  //renderElement(tripFiterTitle, new MakeFiterForm().getElement(), `afterEnd`);//!
+  const tripMenuElement = document.querySelector(`.trip-main__trip-controls`);
+  renderElement(tripMenuElement, new NavigationComponent().getElement(), RENDER_POSITION.beforeEnd);
+  renderElement(tripMenuElement, new FiterFormComponent().getElement(), RENDER_POSITION.beforeEnd);
   const tripEventsElement = document.querySelector(`.trip-events`);
   renderElement(tripEventsElement, new SortFormComponent().getElement(), RENDER_POSITION.beforeEnd);
   renderElement(tripEventsElement, new DayListComponent().getElement(), RENDER_POSITION.beforeEnd);
