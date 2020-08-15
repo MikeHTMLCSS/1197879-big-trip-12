@@ -10,6 +10,7 @@ import DayListComponent from './view/day_list.js';
 import {renderDays} from './render/day.js';
 import DayElementComponent from './view/day_element.js';
 import PointElementComponent from './view/point_element.js';
+import EditingElementComponent from './view/editing_element.js';
 
 import {callMockGenerationFunctions} from './mock/call.js';
 const routeData = callMockGenerationFunctions()[0];
@@ -25,6 +26,6 @@ const renderSite = () => {
   renderElement(tripEventsElement, new SortFormComponent().getElement(), RENDER_POSITION.beforeEnd);
   renderElement(tripEventsElement, new DayListComponent().getElement(), RENDER_POSITION.beforeEnd);
   const tripDaysElement = document.querySelector(`.trip-days`);
-  renderDays(renderElement, DayElementComponent, PointElementComponent, tripDaysElement, dayData);
+  renderDays(renderElement, DayElementComponent, PointElementComponent, EditingElementComponent, tripDaysElement, dayData);
 };
 renderSite();
