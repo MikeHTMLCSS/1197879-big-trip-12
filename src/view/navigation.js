@@ -1,4 +1,4 @@
-class MakeNavigation {
+export default class NavigationComponent {
   constructor() {
     this.getHTML = () => {
       let navigation = `
@@ -10,4 +10,3 @@ class MakeNavigation {
     }
   }
 };
-export default MakeNavigation;

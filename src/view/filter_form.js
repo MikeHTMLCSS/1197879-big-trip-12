@@ -1,4 +1,4 @@
-class MakeFiterForm {
+export default class FiterFormComponent {
   constructor() {
     this.getHTML = () => {
       let filterForm = `
@@ -24,4 +24,3 @@ class MakeFiterForm {
     }
   }
 };
-export default MakeFiterForm;

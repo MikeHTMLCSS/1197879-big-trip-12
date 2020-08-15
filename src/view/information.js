@@ -1,31 +1,50 @@
 import {MONTHS} from '../data/constant.js';
-class MakeInformation {
+import {createElement} from '../util/utils.js'
+export default class InformationComponent {
   constructor(data) {
-    this.getHTML = () => {
-      let informationCities = ``;
-      for (let i = 0; i < data.cities.length - 1; i++) {
-        informationCities = informationCities + data.cities[i] + ` &mdash; `;
-      }
-      informationCities = informationCities + data.cities[data.cities.length - 1];
-      let informationDate = MONTHS[data.date.start.month - 1] + ` ` + data.date.start.day;
-      if (data.date.start.month === data.date.end.month) {
-        informationDate = informationDate + `&mdash;` + data.date.end.day;
-      } else {
-        informationDate = informationDate + ` &mdash; ` + MONTHS[data.date.end.month - 1] + ` ` + data.date.end.day;
-      }
-      return `
-      <section class="trip-main__trip-info  trip-info">
-        <div class="trip-info__main">
-          <h1 class="trip-info__title">${informationCities}</h1>
-      
-          <p class="trip-info__dates">${informationDate}</p>
-        </div>
-      
-        <p class="trip-info__cost">
-          Total: &euro;&nbsp;<span class="trip-info__cost-value"></span>
-        </p>
-      </section>`;
-    };
+    this._element = null;
+    this._data = data;
+  }
+  _getCities() {
+    let informationCities = ``;
+    for (let i = 0; i < this._data.cities.length - 1; i++) {
+      informationCities = informationCities + this._data.cities[i] + ` &mdash; `;
+    }
+    informationCities = informationCities + this._data.cities[this._data.cities.length - 1];
+    return informationCities;
+  }
+  _getDate() {
+    let informationDate = MONTHS[this._data.date.start.month - 1] + ` ` + this._data.date.start.day;
+    if (this._data.date.start.month === this._data.date.end.month) {
+      informationDate = informationDate + `&mdash;` + this._data.date.end.day;
+    } else {
+      informationDate = informationDate + ` &mdash; ` + MONTHS[this._data.date.end.month - 1] + ` ` + this._data.date.end.day;
+    }
+    return informationDate;
+  }
+  _getTemplate() {
+    const informationCities = this._getCities();
+    const informationDate = this._getDate();
+    return `
+    <section class="trip-main__trip-info  trip-info">
+      <div class="trip-info__main">
+        <h1 class="trip-info__title">${informationCities}</h1>
+    
+        <p class="trip-info__dates">${informationDate}</p>
+      </div>
+    
+      <p class="trip-info__cost">
+        Total: &euro;&nbsp;<span class="trip-info__cost-value"></span>
+      </p>
+    </section>`;
+  }
+  getElement() {
+    if (this._element === null) {
+      this._element = createElement(this._getTemplate());
+    }
+    return this._element;
+  }
+  removeElement() {
+    this._element = null;
   }
 };
-export default MakeInformation;
