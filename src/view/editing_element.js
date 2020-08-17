@@ -189,4 +189,14 @@ export default class EditingElementComponent {
   removeElement() {
     this._element = null;
   }
+  openListener(container, anotherElement) {
+    container.replaceChild(anotherElement, this.getElement());
+  }
+  changeListener(container, anotherElement) {
+    container.replaceChild(anotherElement, this.getElement());
+  }
+  addOpenListener(container, anotherElement) {
+    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this.openListener.bind(this, container, anotherElement));
+    this.getElement().querySelector('.event__save-btn').addEventListener('click', this.changeListener.bind(this, container, anotherElement));
+  }
 };

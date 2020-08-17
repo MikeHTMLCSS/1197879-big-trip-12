@@ -107,4 +107,10 @@ export default class PointElementComponent {
   removeElement() {
     this._element = null;
   }
+  openListener(container, anotherElement) {
+    container.replaceChild(anotherElement, this.getElement());
+  }
+  addOpenListener(container, anotherElement) {
+    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this.openListener.bind(this, container, anotherElement));
+  }
 };
