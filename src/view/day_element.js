@@ -1,9 +1,9 @@
+import ElementAbstract from './element_absract.js';
 import {MONTHS} from '../data/constant.js';
-import {createElement} from '../util/utils.js'
-export default class DayElementComponent {
+export default class DayElementComponent extends ElementAbstract {
   constructor(data) {
+    super();
     this._data = data;
-    this._element = null;
   }
   _getTemplate() {
     let dayElement = `
@@ -16,14 +16,5 @@ export default class DayElementComponent {
       </ul>
     </li>`;
     return dayElement;
-  }
-  getElement() {
-    if (this._element === null) {
-      this._element = createElement(this._getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
   }
 };

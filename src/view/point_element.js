@@ -1,4 +1,4 @@
-import {createElement} from '../util/utils.js'
+import PointAbstract from './point_abstract.js';
 const POINT_ELEMENT_TYPES = {
   'Taxi': {
     image: 'taxi.png',
@@ -42,10 +42,10 @@ const POINT_ELEMENT_TYPES = {
   },
 };
 const NUMBER_OF_MINUTES_PER_HOUR = 60;
-export default class PointElementComponent {
+export default class PointElementComponent extends PointAbstract {
   constructor(data) {
+    super();
     this._data = data;
-    this._element = null;
   }
   _getTemplate() {
     let eventDuration = (this._data.endTime.hours - this._data.startTime.hours) * NUMBER_OF_MINUTES_PER_HOUR + this._data.endTime.minutes - this._data.startTime.minutes;
@@ -98,19 +98,7 @@ export default class PointElementComponent {
     </li>`;
     return pointElement;
   }
-  getElement() {
-    if (this._element === null) {
-      this._element = createElement(this._getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
-  }
-  openListener(container, anotherElement) {
-    container.replaceChild(anotherElement, this.getElement());
-  }
   addOpenListener(container, anotherElement) {
-    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this.openListener.bind(this, container, anotherElement));
+    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this._openListener.bind(this, container, anotherElement));
   }
 };

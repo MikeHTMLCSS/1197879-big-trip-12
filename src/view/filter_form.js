@@ -1,8 +1,5 @@
-import {createElement} from '../util/utils.js';
-export default class FiterFormComponent {
-  constructor() {
-    this._element = null;
-  }
+import ElementAbstract from './element_absract.js';
+export default class FiterFormComponent extends ElementAbstract {
   _getTemplate() {
     let filterForm = `
     <form class="trip-filters" action="#" method="get">
@@ -24,14 +21,5 @@ export default class FiterFormComponent {
       <button class="visually-hidden" type="submit">Accept filter</button>
     </form>`;
     return filterForm;
-  }
-  getElement() {
-    if (this._element === null) {
-      this._element = createElement(this._getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
   }
 };

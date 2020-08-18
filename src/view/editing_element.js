@@ -1,8 +1,5 @@
-import {createElement} from '../util/utils.js';
-export default class EditingElementComponent {
-  constructor() {
-    this._element = null;
-  }
+import PointAbstract from './point_abstract.js';
+export default class EditingElementComponent extends PointAbstract {
   _getTemplate() {
     let dayList = `
     <li class="trip-events__item">
@@ -180,23 +177,11 @@ export default class EditingElementComponent {
     </li>`;
     return dayList;
   }
-  getElement() {
-    if (this._element === null) {
-      this._element = createElement(this._getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
-  }
-  openListener(container, anotherElement) {
-    container.replaceChild(anotherElement, this.getElement());
-  }
-  changeListener(container, anotherElement) {
+  _changeListener(container, anotherElement) {
     container.replaceChild(anotherElement, this.getElement());
   }
   addOpenListener(container, anotherElement) {
-    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this.openListener.bind(this, container, anotherElement));
-    this.getElement().querySelector('.event__save-btn').addEventListener('click', this.changeListener.bind(this, container, anotherElement));
+    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this._openListener.bind(this, container, anotherElement));
+    this.getElement().querySelector('.event__save-btn').addEventListener('click', this._changeListener.bind(this, container, anotherElement));
   }
 };

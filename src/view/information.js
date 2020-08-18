@@ -1,8 +1,8 @@
+import ElementAbstract from './element_absract.js';
 import {MONTHS} from '../data/constant.js';
-import {createElement} from '../util/utils.js'
-export default class InformationComponent {
+export default class InformationComponent extends ElementAbstract {
   constructor(data) {
-    this._element = null;
+    super();
     this._data = data;
   }
   _getCities() {
@@ -37,14 +37,5 @@ export default class InformationComponent {
         Total: &euro;&nbsp;<span class="trip-info__cost-value"></span>
       </p>
     </section>`;
-  }
-  getElement() {
-    if (this._element === null) {
-      this._element = createElement(this._getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
   }
 };

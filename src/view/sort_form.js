@@ -1,8 +1,5 @@
-import {createElement} from '../util/utils.js';
-export default class SortFormComponent {
-  constructor() {
-    this._element = null;
-  }
+import ElementAbstract from './element_absract.js';
+export default class SortFormComponent extends ElementAbstract {
   _getTemplate() {
     let sortForm = `
     <h2 class="visually-hidden trip-main__filter-title">Filter events</h2>
@@ -37,14 +34,5 @@ export default class SortFormComponent {
       <span class="trip-sort__item  trip-sort__item--offers">Offers</span>
     </form>`;
     return sortForm;
-  }
-  getElement() {
-    if (this._element === null) {
-      this._element = createElement(this._getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
   }
 };
