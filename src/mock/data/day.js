@@ -28,6 +28,7 @@ const makeRoutePointDataMock = () => {
     information: ROUTE_POINT.informations[Math.round(Math.random() * (ROUTE_POINT.informations.length - 1))],
     photos: [],
     cost: Math.round(Math.random() * (ROUTE_POINT.costMax - ROUTE_POINT.costMin)) + ROUTE_POINT.costMin,
+    favorite: true,
   };
   return routePointData;
 };

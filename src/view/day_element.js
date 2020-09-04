@@ -1,6 +1,6 @@
 import ElementAbstract from './element_absract.js';
 import {MONTHS} from '../data/constant.js';
-export default class DayElementComponent extends ElementAbstract {
+export default class DayComponent extends ElementAbstract {
   constructor(data) {
     super();
     this._data = data;

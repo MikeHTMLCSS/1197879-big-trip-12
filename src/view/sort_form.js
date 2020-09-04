@@ -1,7 +1,7 @@
 import ElementAbstract from './element_absract.js';
 export default class SortFormComponent extends ElementAbstract {
   _getTemplate() {
-    let sortForm = `
+    return `
     <h2 class="visually-hidden trip-main__filter-title">Filter events</h2>
     <form class="trip-events__trip-sort  trip-sort" action="#" method="get">
       <span class="trip-sort__item  trip-sort__item--day">Day</span>
@@ -33,6 +33,5 @@ export default class SortFormComponent extends ElementAbstract {
 
       <span class="trip-sort__item  trip-sort__item--offers">Offers</span>
     </form>`;
-    return sortForm;
   }
 };

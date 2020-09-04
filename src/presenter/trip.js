@@ -5,42 +5,68 @@ import NavigationComponent from '../view/navigation.js';
 import FiterFormComponent from '../view/filter_form.js';
 import SortFormComponent from '../view/sort_form.js';
 import DayListComponent from '../view/day_list.js';
-import {renderDays} from '../render/day.js';
-import DayElementComponent from '../view/day_element.js';
-import PointElementComponent from '../view/point_element.js';
-import EditingElementComponent from '../view/editing_element.js';
+import DayComponent from '../view/day_element.js';
+import PointComponent from '../view/point_element.js';
+import EditingComponent from '../view/editing_element.js';
 export default class Trip {
   constructor(routeData, dayData) {
     this._routeData = routeData;
     this._dayData = dayData;
-    this._informationElement = new InformationComponent(this._routeData);
-    this._navigationElement = new NavigationComponent();
-    this._filterFormElement = new FiterFormComponent();
-    this._sortFormElement = new SortFormComponent();
-    this._dayListElement = new DayListComponent();
+    this._informationInstance = new InformationComponent(this._routeData);
+    this._navigationInstance = new NavigationComponent();
+    this._filterFormInstance = new FiterFormComponent();
+    this._sortFormInstance = new SortFormComponent();
+    this._dayListInstance = new DayListComponent();
+    this._points = [];
+    this._pointForms = [];
   }
-  renderInformation() {
+  _renderInformation() {
     const tripMainElement = document.querySelector(`.trip-main`);
-    renderElement(tripMainElement, this._informationElement.getElement(), RENDER_POSITION.afterBegin);
+    renderElement(tripMainElement, this._informationInstance.getElement(), RENDER_POSITION.afterBegin);
   }
-  renderMenu() {
+  _renderMenu() {
     const tripMenuElement = document.querySelector(`.trip-main__trip-controls`);
-    renderElement(tripMenuElement, this._navigationElement.getElement(), RENDER_POSITION.beforeEnd);
-    renderElement(tripMenuElement, this._filterFormElement.getElement(), RENDER_POSITION.beforeEnd);
+    renderElement(tripMenuElement, this._navigationInstance.getElement(), RENDER_POSITION.beforeEnd);
+    renderElement(tripMenuElement, this._filterFormInstance.getElement(), RENDER_POSITION.beforeEnd);
   }
-  renderRoute() {
+  _renderRoute() {
     const tripEventsElement = document.querySelector(`.trip-events`);
-    renderElement(tripEventsElement, this._sortFormElement.getElement(), RENDER_POSITION.beforeEnd);
-    renderElement(tripEventsElement, this._dayListElement.getElement(), RENDER_POSITION.beforeEnd);
+    renderElement(tripEventsElement, this._sortFormInstance.getElement(), RENDER_POSITION.beforeEnd);
+    renderElement(tripEventsElement, this._dayListInstance.getElement(), RENDER_POSITION.beforeEnd);
   }
-  renderEvents() {
+  _updateFavorite(routerPoint) {
+    routerPoint.favorite = !routerPoint.favorite;
+  }
+  _resetPoints(container) {
+    this._pointForms.forEach((form, index) => {
+      form.changeListener(container, this._points[index]);
+    });
+  }
+  _renderEvents() {
     const tripDaysElement = document.querySelector(`.trip-days`);
-    renderDays(renderElement, DayElementComponent, PointElementComponent, EditingElementComponent, tripDaysElement, this._dayData);
+    this._dayData.forEach((dayData, index) => {
+      let day = new DayComponent(dayData);
+      let dayElement = day.getElement().querySelector('.trip-days__item');
+      this._points[index] = [];
+      this._pointForms[index] = [];
+      renderElement(tripDaysElement, dayElement, RENDER_POSITION.beforeEnd);
+      dayData.routePoints.forEach((pointData) => {
+        let pointInstance = new PointComponent(pointData);
+        let editingInstance = new EditingComponent(pointData, this._updateFavorite, this._routeData.cities);
+        this._points[index].push(pointInstance);
+        this._pointForms[index].push(editingInstance);
+        pointInstance.addOpenListener(dayElement, editingInstance.getElement());
+        editingInstance.addOpenListener(dayElement, pointInstance.getElement(), this._resetPoints.bind(this));
+        editingInstance.restoreHandlers();
+        renderElement(dayElement, pointInstance.getElement(), RENDER_POSITION.beforeEnd);
+      });
+    });
   }
-  renderSite() {
-    this.renderInformation();
-    this.renderMenu();
-    this.renderRoute();
-    this.renderEvents();
+  init() {
+    this._updateFavorite = this._updateFavorite.bind(this);
+    this._renderInformation();
+    this._renderMenu();
+    this._renderRoute();
+    this._renderEvents();
   }
 };

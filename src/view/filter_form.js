@@ -1,7 +1,7 @@
 import ElementAbstract from './element_absract.js';
 export default class FiterFormComponent extends ElementAbstract {
   _getTemplate() {
-    let filterForm = `
+    return `
     <form class="trip-filters" action="#" method="get">
       <div class="trip-filters__filter">
         <input id="filter-everything" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="everything" checked>
@@ -20,6 +20,5 @@ export default class FiterFormComponent extends ElementAbstract {
 
       <button class="visually-hidden" type="submit">Accept filter</button>
     </form>`;
-    return filterForm;
   }
 };

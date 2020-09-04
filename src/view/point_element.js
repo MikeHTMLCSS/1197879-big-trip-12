@@ -1,48 +1,7 @@
 import PointAbstract from './point_abstract.js';
-const POINT_ELEMENT_TYPES = {
-  'Taxi': {
-    image: 'taxi.png',
-    text: 'Taxi to',
-  },
-  'Bus': {
-    image: 'bus.png',
-    text: 'Bus to',
-  },
-  'Train': {
-    image: 'train.png',
-    text: 'Train to',
-  },
-  'Ship': {
-    image: 'ship.png',
-    text: 'Ship to',
-  },
-  'Transport': {
-    image: 'transport.png',
-    text: 'Transport to',
-  },
-  'Drive': {
-    image: 'drive.png',
-    text: 'Drive to',
-  },
-  'Flight': {
-    image: 'flight.png',
-    text: 'Flight to',
-  },
-  'Check': {
-    image: 'check-in.png',
-    text: 'Check-in in',
-  },
-  'Sightseeing': {
-    image: 'sightseeing.png',
-    text: 'Sightseeing in',
-  },
-  'Restaurant': {
-    image: 'restaurant.png',
-    text: 'Restaurant in',
-  },
-};
+import {POINT_ELEMENT_TYPES} from '../data/constant.js';
 const NUMBER_OF_MINUTES_PER_HOUR = 60;
-export default class PointElementComponent extends PointAbstract {
+export default class PointComponent extends PointAbstract {
   constructor(data) {
     super();
     this._data = data;
@@ -71,7 +30,7 @@ export default class PointElementComponent extends PointAbstract {
         &euro;&nbsp;<span class="event__offer-price">${this._data.options[i].cost}</span>
       </li>`;
     }
-    let pointElement = `
+    return `
     <li class="trip-events__item">
       <div class="event">
         <div class="event__type">
@@ -96,7 +55,6 @@ export default class PointElementComponent extends PointAbstract {
         </button>
       </div>
     </li>`;
-    return pointElement;
   }
   addOpenListener(container, anotherElement) {
     this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this._openListener.bind(this, container, anotherElement));
