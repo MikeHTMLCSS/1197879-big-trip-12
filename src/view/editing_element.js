@@ -161,10 +161,7 @@ export default class EditingComponent extends ElementAbstract {
     </li>`;
   }
   changeListener(container, anotherElement) {
-    console.log(container);
-    console.log(anotherElement.getElement());
-    console.log(this.getElement());
-    container.replaceChild(anotherElement.getElement(), this.getElement());
+    container.replaceChild(anotherElement[0].getElement(), this.getElement());
   }
   _openListener(container, anotherElement) {
     container.replaceChild(anotherElement, this.getElement());

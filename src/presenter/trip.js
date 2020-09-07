@@ -39,7 +39,7 @@ export default class Trip {
   }
   _resetPoints(container) {
     this._pointForms.forEach((form, index) => {
-      form.changeListener(container, this._points[index]);
+      form[0].changeListener(container, this._points[index]);
     });
   }
   _renderEvents() {
