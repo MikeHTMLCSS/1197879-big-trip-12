@@ -39,7 +39,7 @@ export default class Trip {
   }
   _resetPoints(container) {
     this._pointForms.forEach((form, index) => {
-      form[0].changeListener(container, this._points[index]);
+      form.forEach(form => form.changeListener(container, this._points[index]));
     });
   }
   _renderEvents() {
@@ -58,7 +58,7 @@ export default class Trip {
         pointInstance.addOpenListener(dayElement, editingInstance.getElement());
         editingInstance.addOpenListener(dayElement, pointInstance.getElement(), this._resetPoints.bind(this));
         editingInstance.restoreHandlers();
-        renderElement(dayElement, pointInstance.getElement(), RENDER_POSITION.beforeEnd);
+        renderElement(dayElement.querySelector('.trip-events__list'), pointInstance.getElement(), RENDER_POSITION.beforeEnd);
       });
     });
   }

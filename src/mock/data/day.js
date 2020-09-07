@@ -44,7 +44,9 @@ const makeDayDataMock = () => {
       month: 3,
       day: 24,
     },
-    routePoints: [routePointDataMocks[Math.round(Math.random() * (routePointDataMocks.length - 1))]],
+    routePoints: [
+      routePointDataMocks[Math.round(Math.random() * (routePointDataMocks.length - 1))],
+      routePointDataMocks[Math.round(Math.random() * (routePointDataMocks.length - 1))]],
   }
   return dayData;
 };

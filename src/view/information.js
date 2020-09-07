@@ -25,8 +25,7 @@ export default class InformationComponent extends ElementAbstract {
   _getTemplate() {
     const informationCities = this._getCities();
     const informationDate = this._getDate();
-    return `
-    <section class="trip-main__trip-info  trip-info">
+    return `<section class="trip-main__trip-info  trip-info">
       <div class="trip-info__main">
         <h1 class="trip-info__title">${informationCities}</h1>
     

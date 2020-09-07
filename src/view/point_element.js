@@ -23,8 +23,7 @@ export default class PointComponent extends PointAbstract {
     this._data.endTime.minutes = String(this._data.endTime.minutes).padStart(2, '0');
     let eventOffers = '';
     for (let i = 0; i < this._data.options.length; i++) {
-      eventOffers = eventOffers + `
-      <li class="event__offer">
+      eventOffers = eventOffers + `<li class="event__offer">
         <span class="event__offer-title">${this._data.options[i].name}</span>
         &plus;
         &euro;&nbsp;<span class="event__offer-price">${this._data.options[i].cost}</span>

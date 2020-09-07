@@ -30,8 +30,7 @@ export default class EditingComponent extends ElementAbstract {
     return offers
   }
   _getTemplate() {
-    return `
-    <li class="trip-events__item">
+    return `<li class="trip-events__item">
       <form class="event  event--edit" action="#" method="post">
         <header class="event__header">
           <div class="event__type-wrapper">
@@ -161,7 +160,7 @@ export default class EditingComponent extends ElementAbstract {
     </li>`;
   }
   changeListener(container, anotherElement) {
-    container.replaceChild(anotherElement[0].getElement(), this.getElement());
+    container.replaceChild(anotherElement.getElement(), this.getElement());
   }
   _openListener(container, anotherElement) {
     container.replaceChild(anotherElement, this.getElement());
