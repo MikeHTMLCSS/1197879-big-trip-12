@@ -165,10 +165,9 @@ export default class EditingComponent extends ElementAbstract {
   _openListener(container, anotherElement) {
     container.replaceChild(anotherElement, this.getElement());
   }
-  addOpenListener(container, anotherElement, closeForms) {
+  addOpenListener(container, anotherElement) {
     this.getElement().querySelector('.event__rollup-btn').addEventListener('click', () => {
       this._openListener.bind(this, container, anotherElement)();
-      closeForms(container);
     });
     this.getElement().querySelector('.event__save-btn').addEventListener('click', this.changeListener.bind(this, container, anotherElement));
   }

@@ -19,6 +19,8 @@ export default class Trip {
     this._dayListInstance = new DayListComponent();
     this._points = [];
     this._pointForms = [];
+
+    this._elements = [];
   }
   _renderInformation() {
     const tripMainElement = document.querySelector(`.trip-main`);
@@ -37,28 +39,37 @@ export default class Trip {
   _updateFavorite(routerPoint) {
     routerPoint.favorite = !routerPoint.favorite;
   }
-  _resetPoints(container) {
-    this._pointForms.forEach((form, index) => {
-      form.forEach(form => form.changeListener(container, this._points[index]));
-    });
+  _resetPoints() {
+    this._elements.forEach(({point, editing, container}) => {
+      if (container.contains(editing.getElement()) ) {
+        container.replaceChild(point.getElement(), editing.getElement());
+      }
+    })
   }
   _renderEvents() {
     const tripDaysElement = document.querySelector(`.trip-days`);
     this._dayData.forEach((dayData, index) => {
-      let day = new DayComponent(dayData);
-      let dayElement = day.getElement().querySelector('.trip-days__item');
-      this._points[index] = [];
-      this._pointForms[index] = [];
+      let dayComponent = new DayComponent(dayData);
+      let dayElement = dayComponent.getElement();
+
       renderElement(tripDaysElement, dayElement, RENDER_POSITION.beforeEnd);
+
+      const tripEventsListElement = dayElement.querySelector('ul.trip-events__list');
       dayData.routePoints.forEach((pointData) => {
-        let pointInstance = new PointComponent(pointData);
-        let editingInstance = new EditingComponent(pointData, this._updateFavorite, this._routeData.cities);
-        this._points[index].push(pointInstance);
-        this._pointForms[index].push(editingInstance);
-        pointInstance.addOpenListener(dayElement, editingInstance.getElement());
-        editingInstance.addOpenListener(dayElement, pointInstance.getElement(), this._resetPoints.bind(this));
-        editingInstance.restoreHandlers();
-        renderElement(dayElement.querySelector('.trip-events__list'), pointInstance.getElement(), RENDER_POSITION.beforeEnd);
+        let pointComponent = new PointComponent(pointData);
+        let editingComponent = new EditingComponent(pointData, this._updateFavorite, this._routeData.cities);
+
+        this._elements.push({
+          container: tripEventsListElement,
+          point: pointComponent,
+          editing: editingComponent
+        })
+
+        pointComponent.addOpenListener(tripEventsListElement, editingComponent.getElement(), this._resetPoints.bind(this));
+        editingComponent.addOpenListener(tripEventsListElement, pointComponent.getElement());
+        editingComponent.restoreHandlers();
+
+        renderElement(tripEventsListElement, pointComponent.getElement(), RENDER_POSITION.beforeEnd);
       });
     });
   }

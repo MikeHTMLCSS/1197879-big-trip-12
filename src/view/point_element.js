@@ -29,8 +29,7 @@ export default class PointComponent extends PointAbstract {
         &euro;&nbsp;<span class="event__offer-price">${this._data.options[i].cost}</span>
       </li>`;
     }
-    return `
-    <li class="trip-events__item">
+    return `<li class="trip-events__item">
       <div class="event">
         <div class="event__type">
           <img class="event__type-icon" width="42" height="42" src="img/icons/${POINT_ELEMENT_TYPES[this._data.type].image}" alt="Event type icon">
@@ -55,7 +54,10 @@ export default class PointComponent extends PointAbstract {
       </div>
     </li>`;
   }
-  addOpenListener(container, anotherElement) {
-    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this._openListener.bind(this, container, anotherElement));
+  addOpenListener(container, anotherElement, cb) {
+    this.getElement()
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this._openListener.bind(this, container, anotherElement, cb));
+
   }
 };
