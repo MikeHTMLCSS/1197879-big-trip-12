@@ -2,7 +2,7 @@ import {RENDER_POSITION} from '../data/constant.js';
 export const createElement = (template) => {
     const element = document.createElement('div');
     element.innerHTML = template;
-    return element;
+    return element.firstChild;
 };
 export const renderElement = (container, element, place) => {
     switch (place) {
